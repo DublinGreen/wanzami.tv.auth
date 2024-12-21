@@ -1,0 +1,23 @@
+type Profile {
+	id: ID!
+	status: Int
+	name: String!
+	avatar: String!
+	user: User
+}
+
+
+extend type Query {
+	findAllProfiles: [Profile]!
+	countProfiles: Int!
+	profileById(id:ID!):Profile 
+}
+
+
+# Root
+extend type Mutation {
+	createProfile(userId: Int!, status: Int!, name: String!, avatar: String!): Profile!
+	updateProfile(id: Int!, status: Int!, name: String!, avatar: String!): Profile!
+	softDeleteProfileById(id: Int!): Profile!
+	setActiveProfileById(id: Int!): Profile!
+}

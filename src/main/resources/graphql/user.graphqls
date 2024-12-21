@@ -1,0 +1,22 @@
+type User {
+	id: ID!
+	status: ID!
+	username: String!
+	email: String!
+	telephone: String!
+	password: String
+}
+
+type Query {
+	findAllUsers: [User]!
+	countUsers: Int!
+	userById(id:ID!):User 
+}
+
+type Mutation {
+	createUser(username: String!, email: String!, password: String!, telephone: String!): User!
+	login(email: String!, password: String!): String!
+	softDeleteUserById(id: Int!): User!
+	setActiveUserById(id: Int!): User!
+}
+
