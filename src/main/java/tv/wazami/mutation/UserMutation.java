@@ -63,7 +63,7 @@ public class UserMutation implements GraphQLMutationResolver {
 				
 				JwtToken jwtToken = new JwtToken();
 				jwtToken.setStatus(1);
-				jwtToken.setToken(token);
+				jwtToken.setJwt(token);
 				jwtToken.setUser(new User(user.getId()));		
 				jwtToken.setCreated_at(Instant.now());
 				jwtRepository.save(jwtToken);

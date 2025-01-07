@@ -17,14 +17,14 @@ import org.springframework.context.annotation.Configuration;
 @EntityScan(basePackages = {"tv.wazami.model"})
 @ComponentScan(basePackages = "tv.wazami")
 @SpringBootApplication
-public class SpringBootGraphqlMysqlApplication {
+public class ApplicationEntry {
 
 	/**
 	 * Application main method
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootGraphqlMysqlApplication.class, args);
+		SpringApplication.run(ApplicationEntry.class, args);
 	}
 
 	/**

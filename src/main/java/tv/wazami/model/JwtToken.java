@@ -23,8 +23,8 @@ public class JwtToken {
 	@Column(name = "status", nullable = false, columnDefinition = "int(11) not null default 0")
 	private Integer status;
 	
-	@Column(name = "token", nullable = false, unique = true)
-    private String token;
+	@Column(name = "jwt", nullable = false, unique = true)
+    private String jwt;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false, updatable = false)
@@ -52,12 +52,12 @@ public class JwtToken {
 		this.status = status;
 	}
 
-	public String getToken() {
-		return token;
+	public String getJwt() {
+		return jwt;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setJwt(String jwt) {
+		this.jwt = jwt;
 	}
 
 	public User getUser() {

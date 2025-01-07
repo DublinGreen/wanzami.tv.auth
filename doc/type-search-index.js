@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"tv.wazami","l":"SpringBootGraphqlMysqlApplication"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"tv.wazami","l":"ApplicationEntry"}];updateSearchResults();
