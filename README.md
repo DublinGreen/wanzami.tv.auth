@@ -1,5 +1,5 @@
 # Spring Boot + GraphQL + MySQL (Wazami tv auth)
-Wazami tv auth service to handle login and registration of new users. Using Apollo client (). Java doc has been generated and unit test
+Wanzami tv auth service to handle login and registration of new users. Using Apollo client (). Java doc has been generated and unit test
 
 ## Run Spring Boot application
 ```
