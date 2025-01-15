@@ -1,4 +1,4 @@
-package tv.wazami.mutation;
+package tv.wanzami.mutation;
 
 import java.time.Instant;
 import java.util.Date;
@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import jakarta.persistence.EntityNotFoundException;
-import tv.wazami.config.JwtUtil;
-import tv.wazami.config.PasswordEncoder;
-import tv.wazami.model.JwtToken;
-import tv.wazami.model.User;
-import tv.wazami.repository.JwtRepository;
-import tv.wazami.repository.UserRepository;
+import tv.wanzami.config.JwtUtil;
+import tv.wanzami.config.PasswordEncoder;
+import tv.wanzami.enums.Role;
+import tv.wanzami.model.JwtToken;
+import tv.wanzami.model.User;
+import tv.wanzami.repository.JwtRepository;
+import tv.wanzami.repository.UserRepository;
 
 /**
  * User Mutation
@@ -30,7 +31,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		this.jwtRepository = jwtRepository;
 	}
 
-	public User createUser(String username, String email, String password, String telephone) {
+	public User createUser(String username, String email, String password, String telephone, String role) {
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
@@ -41,8 +42,10 @@ public class UserMutation implements GraphQLMutationResolver {
 		user.setStatus(0);
 		user.setTelephone(telephone);
 		user.setCreated_at(new Date().toInstant());
-		user.setUpdated_at(new Date().toInstant());
 
+		if (role != null & role.equalsIgnoreCase(Role.ADMIN.toString()) & role.equalsIgnoreCase(Role.NORMAL.toString()))
+			user.setRole(role);
+		
 		userRepository.save(user);
 
 		return user;
@@ -75,35 +78,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		
 		throw new EntityNotFoundException("Email and password combination invalid!");
 	}
-
-	public User updateUser(Long id, String username, String email, String password, String telephone)
-			throws EntityNotFoundException {
-		Optional<User> optUser = userRepository.findById(id);
-
-		if (optUser.isPresent()) {
-			User user = optUser.get();
-
-			if (username != null)
-				user.setUsername(username);
-
-			if (email != null)
-				user.setEmail(email);
-
-			if (password != null) {
-				PasswordEncoder passwordEncoder = new PasswordEncoder(password);
-				user.setPassword(passwordEncoder.encode());
-			}
-
-			if (telephone != null)
-				user.setTelephone(telephone);
-
-			userRepository.save(user);
-			return user;
-		}
-
-		throw new EntityNotFoundException("Not found User to update!");
-	}
-
+	
 	public User softDeleteUserById(Long id) throws EntityNotFoundException {
 		Optional<User> optUser = userRepository.findById(id);
 

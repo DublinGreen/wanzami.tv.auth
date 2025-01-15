@@ -1,4 +1,4 @@
-package tv.wazami.query;
+package tv.wanzami.query;
 
 import java.util.Optional;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
-import tv.wazami.model.Country;
-import tv.wazami.repository.CountryRepository;
+import tv.wanzami.model.Country;
+import tv.wanzami.repository.CountryRepository;
 
 /**
  * Country Query

@@ -1,4 +1,4 @@
-package tv.wazami.config;
+package tv.wanzami.config;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

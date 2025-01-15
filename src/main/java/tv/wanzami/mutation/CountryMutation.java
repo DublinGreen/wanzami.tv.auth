@@ -1,4 +1,4 @@
-package tv.wazami.mutation;
+package tv.wanzami.mutation;
 
 import java.util.Optional;
 
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import jakarta.persistence.EntityNotFoundException;
-import tv.wazami.model.Country;
-import tv.wazami.repository.CountryRepository;
+import tv.wanzami.model.Country;
+import tv.wanzami.repository.CountryRepository;
 
 /**
  * Country Mutation

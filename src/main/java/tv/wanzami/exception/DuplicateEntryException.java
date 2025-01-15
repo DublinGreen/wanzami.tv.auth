@@ -1,4 +1,4 @@
-package tv.wazami.exception;
+package tv.wanzami.exception;
 
 /**
  * Customs Entities DuplicateEntryException

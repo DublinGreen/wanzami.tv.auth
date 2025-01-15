@@ -1,9 +1,11 @@
-package tv.wazami.model;
+package tv.wanzami.model;
 
 import java.time.Instant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +34,9 @@ public class User {
 
 	@Column(name = "telephone", nullable = false, unique = true)
 	private String telephone;
+	
+	@Enumerated(EnumType.STRING)
+    private String role;
 
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
@@ -121,6 +126,14 @@ public class User {
 		this.email = email;
 		this.password = passoword;
 		this.telephone = telephone;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

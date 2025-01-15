@@ -1,4 +1,4 @@
-package tv.wazami.enums;
+package tv.wanzami.enums;
 
 /**
  * Role enum

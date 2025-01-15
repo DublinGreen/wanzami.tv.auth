@@ -1,8 +1,8 @@
-package tv.wazami.repository;
+package tv.wanzami.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import tv.wazami.model.JwtToken;
+import tv.wanzami.model.JwtToken;
 
 /**
  * Jwt Repository Interface

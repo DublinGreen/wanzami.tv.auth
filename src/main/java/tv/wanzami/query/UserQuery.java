@@ -1,4 +1,4 @@
-package tv.wazami.query;
+package tv.wanzami.query;
 
 import java.util.Optional;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
-import tv.wazami.model.User;
-import tv.wazami.repository.UserRepository;
+import tv.wanzami.model.User;
+import tv.wanzami.repository.UserRepository;
 
 /**
  * User Query

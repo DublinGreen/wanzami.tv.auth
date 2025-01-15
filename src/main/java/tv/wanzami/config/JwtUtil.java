@@ -1,4 +1,4 @@
-package tv.wazami.config;
+package tv.wanzami.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

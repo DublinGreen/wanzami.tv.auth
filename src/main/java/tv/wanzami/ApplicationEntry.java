@@ -1,4 +1,4 @@
-package tv.wazami;
+package tv.wanzami;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"tv.wazami.model"})
-@ComponentScan(basePackages = "tv.wazami")
+@EntityScan(basePackages = {"tv.wanzami.model"})
+@ComponentScan(basePackages = "tv.wanzami")
 @SpringBootApplication
 public class ApplicationEntry {
 

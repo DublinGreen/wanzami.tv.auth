@@ -1,4 +1,4 @@
-package tv.wazami.model;
+package tv.wanzami.model;
 
 import java.time.Instant;
 
