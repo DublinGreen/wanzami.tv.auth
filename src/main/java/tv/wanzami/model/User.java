@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import tv.wanzami.enums.Role;
 
 /**
  * User Model
@@ -36,7 +37,7 @@ public class User {
 	private String telephone;
 	
 	@Enumerated(EnumType.STRING)
-    private String role;
+    private Role role;
 
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
@@ -129,11 +130,11 @@ public class User {
 	}
 
 	public String getRole() {
-		return role;
+		return role.toString();
 	}
 
 	public void setRole(String role) {
-		this.role = role;
+		this.role = Role.valueOf(role);
 	}
 
 }

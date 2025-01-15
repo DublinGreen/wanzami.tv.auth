@@ -43,7 +43,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		user.setTelephone(telephone);
 		user.setCreated_at(new Date().toInstant());
 
-		if (role != null & role.equalsIgnoreCase(Role.ADMIN.toString()) & role.equalsIgnoreCase(Role.NORMAL.toString()))
+		if (role != null && role.equalsIgnoreCase(Role.ADMIN.toString()) && role.equalsIgnoreCase(Role.NORMAL.toString()))
 			user.setRole(role);
 		
 		userRepository.save(user);
