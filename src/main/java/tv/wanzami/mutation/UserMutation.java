@@ -85,7 +85,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		if (optUser.isPresent()) {
 			User user = optUser.get();
 			user.setStatus(0);
-
+			user.setUpdated_at(new Date().toInstant());
 			userRepository.save(user);
 			return user;
 		}
@@ -99,7 +99,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		if (optUser.isPresent()) {
 			User user = optUser.get();
 			user.setStatus(1);
-
+			user.setUpdated_at(new Date().toInstant());
 			userRepository.save(user);
 			return user;
 		}
