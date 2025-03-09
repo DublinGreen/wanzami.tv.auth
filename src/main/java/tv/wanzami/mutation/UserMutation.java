@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,12 +21,13 @@ import tv.wanzami.repository.UserRepository;
  * User Mutation
  */
 @Component
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserMutation implements GraphQLMutationResolver {
 
 	private UserRepository userRepository;
 	
 	private JwtRepository jwtRepository;
-
+	
 	public UserMutation(UserRepository userRepository, JwtRepository jwtRepository) {
 		this.userRepository = userRepository;
 		this.jwtRepository = jwtRepository;
@@ -77,6 +79,24 @@ public class UserMutation implements GraphQLMutationResolver {
 		}
 		
 		throw new EntityNotFoundException("Email and password combination invalid!");
+	}
+	
+	public int logout(String token) throws EntityNotFoundException {
+		Optional<JwtToken> optJwt = jwtRepository.findByJwt(token);
+		int returnValue = 0;
+		
+		if (optJwt.isPresent()) {
+			JwtToken jwtToken = optJwt.get();
+			jwtToken.setStatus(0);			
+			jwtRepository.save(jwtToken);
+			jwtRepository.delete(jwtToken);
+			
+			returnValue = 1;
+		}else {
+			throw new EntityNotFoundException("jwt token is invalid!");
+		}
+		
+		return returnValue;
 	}
 	
 	public User softDeleteUserById(Long id) throws EntityNotFoundException {

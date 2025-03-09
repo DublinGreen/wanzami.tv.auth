@@ -17,6 +17,7 @@ type Query {
 type Mutation {
 	createUser(username: String!, email: String!, password: String!, telephone: String!, role: String): User!
 	login(email: String!, password: String!): String!
+	logout(token: String): Int!	
 	softDeleteUserById(id: Int!): User!
 	setActiveUserById(id: Int!): User!
 }

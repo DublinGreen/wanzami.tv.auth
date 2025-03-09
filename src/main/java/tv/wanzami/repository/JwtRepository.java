@@ -1,12 +1,13 @@
 package tv.wanzami.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import tv.wanzami.model.JwtToken;
 
 /**
  * Jwt Repository Interface
  */
 public interface JwtRepository extends JpaRepository<JwtToken, Long> {
-
+	Optional<JwtToken> findByJwt(String jwt);
 }
