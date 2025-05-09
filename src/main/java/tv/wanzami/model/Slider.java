@@ -15,8 +15,8 @@ public class Slider {
 
 	@Column(name = "name", nullable = false)
 	private String name;
-	
-	@Column(name = "description", nullable = false)
+		
+	@Column(name = "description", nullable = false,length = 65535,columnDefinition="Text")
 	private String description;
 	
 	@Column(name = "duration", nullable = false)
@@ -33,7 +33,11 @@ public class Slider {
 	
 	@Column(name = "video_link", nullable = false)
 	private String video_link;
-		
+	
+	@ManyToOne
+	@JoinColumn(name = "video_id", nullable = false, updatable = false)
+	private Video video;
+	
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
 	
@@ -47,13 +51,14 @@ public class Slider {
 		this.id = id;
 	}
 
-	public Slider(String name, String description,String image_link, String video_link) {
+	public Slider(String name, String description,String image_link, String video_link, Video video) {
 		this.name = name;
 		this.status = 0;
 		this.setDescription(description);
 		this.setImage_link(image_link);
 		this.setVideo_link(video_link);
 		this.setDescription(description);
+		this.setVideo(video);
 	}
 
 	public Long getId() {
@@ -90,6 +95,14 @@ public class Slider {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
+		this.video = video;
 	}
 
 	public String getDescription() {

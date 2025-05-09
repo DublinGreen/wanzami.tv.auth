@@ -1,0 +1,10 @@
+type Video {
+	id: ID!
+	category: Category!
+	author: Author!
+	status: Int
+	name: String!
+	description: String!
+	short_description: String!
+	thumbnail: String!
+}

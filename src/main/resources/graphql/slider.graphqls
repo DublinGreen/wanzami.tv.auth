@@ -1,0 +1,19 @@
+type Slider {
+	id: ID!
+	status: Int
+	name: String!
+	description: String!
+	duration: String!
+	video_quality: String!
+	image_link: String!
+	background_link: String!
+	video_link: String!
+	video: Video
+}
+
+extend type Query {
+	countSlider: Int!
+	sliderById(id:ID!):Slider
+	findAllSliders: [Slider]
+	findAllActiveSliders: [Slider]
+}

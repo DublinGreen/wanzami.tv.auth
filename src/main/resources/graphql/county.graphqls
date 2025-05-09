@@ -9,11 +9,3 @@ extend type Query {
 	countCountries: Int!
 	countryById(id:ID!):Country 
 }
-
-# Root
-extend type Mutation {
-	createCountry(name: String!, status: Int): Country!
-	updateCountry(id: Int!, name: String!): Country!
-	softDeleteCountryById(id: Int!): Country!
-	setActiveCountryById(id: Int!): Country!
-}

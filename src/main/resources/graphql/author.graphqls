@@ -1,0 +1,15 @@
+type Author {
+	id: ID!
+	name: String!
+	email: String!
+	telephone: String
+	status: Int
+	age: Int
+	country: Country!
+}
+
+extend type Query {
+	findAllAuthors: [Author]!
+	countAuthors: Int!
+	authorById(id:ID!):Author 
+}

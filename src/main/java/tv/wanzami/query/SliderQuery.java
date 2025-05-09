@@ -26,6 +26,10 @@ public class SliderQuery implements GraphQLQueryResolver {
 	public Iterable<Slider> findAllSliders() {
 		return repository.findAll();
 	}
+	
+	public Iterable<Slider> findAllActiveSliders() {
+		return repository.findByStatus(1);
+	}
 
 	public long countSlider() {
 		return repository.count();
