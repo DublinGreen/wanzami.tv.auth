@@ -10,9 +10,6 @@ import jakarta.persistence.EntityNotFoundException;
 import tv.wanzami.model.Country;
 import tv.wanzami.repository.CountryRepository;
 
-/**
- * Country Mutation
- */
 @Component
 @CrossOrigin(origins = "http://localhost:3000")
 public class CountryMutation implements GraphQLMutationResolver {

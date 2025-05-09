@@ -32,6 +32,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		this.userRepository = userRepository;
 		this.jwtRepository = jwtRepository;
 	}
+	
 
 	public User createUser(String username, String email, String password, String telephone, String role) {
 		User user = new User();
@@ -52,8 +53,36 @@ public class UserMutation implements GraphQLMutationResolver {
 
 		return user;
 	}
-
+	
 	public String login(String email, String password) throws EntityNotFoundException {
+		Optional<User> optUser = userRepository.findByEmail(email);
+		PasswordEncoder passwordEncoder = new PasswordEncoder(password);
+		String hashPassword = passwordEncoder.encode();
+		User user = null;
+		String token = null;
+
+		if (optUser.isPresent()) {
+			user = optUser.get();
+			if (user.getSecret().equals(hashPassword)) {
+				token = JwtUtil.generateToken(email);
+				user.setPassword(token);
+				
+				JwtToken jwtToken = new JwtToken();
+				jwtToken.setStatus(1);
+				jwtToken.setJwt(token);
+				jwtToken.setUser(new User(user.getId()));		
+				jwtToken.setCreated_at(Instant.now());
+				jwtRepository.save(jwtToken);
+				
+				return token;
+
+			}
+		}
+		
+		throw new EntityNotFoundException("Email and password combination invalid!");
+	}
+	
+	public String loginAdmin(String email, String password) throws EntityNotFoundException {
 		Optional<User> optUser = userRepository.findByEmail(email);
 		PasswordEncoder passwordEncoder = new PasswordEncoder(password);
 		String hashPassword = passwordEncoder.encode();

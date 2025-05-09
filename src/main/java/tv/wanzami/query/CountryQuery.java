@@ -11,9 +11,6 @@ import graphql.schema.GraphQLScalarType;
 import tv.wanzami.model.Country;
 import tv.wanzami.repository.CountryRepository;
 
-/**
- * Country Query
- */
 @Component
 @CrossOrigin(origins = "http://localhost:3000")
 public class CountryQuery implements GraphQLQueryResolver {
