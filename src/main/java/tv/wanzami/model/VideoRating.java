@@ -2,31 +2,40 @@ package tv.wanzami.model;
 
 import java.time.Instant;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-public class EmailConfirmation {
+public class VideoRating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(nullable = false)
 	private Long id;
-	
+		
 	@Column(name = "status", nullable = false, columnDefinition = "int(11) not null default 0")
 	private Integer status;
 
-	@Column(name = "userId", nullable = false)
-	private Long userId;
+	@Column(nullable = false, unique = false, length = 200)
+	private String rating;
 	
-	@Column(name = "code", nullable = false, unique = true, length = 200)
-	private String code;
-	
-	@Column(name = "email", nullable = false, unique = true, length = 200)
-	private String email;
+	@Column(nullable = false, unique = false, length = 200)
+	private String description;
 	
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
 	
 	@Column(name = "updated_at", nullable = true)
 	private Instant updated_at;
+	
+	public VideoRating() {
+	}
+
+	public VideoRating(Long id) {
+		this.id = id;
+	}
 
 	public Integer getStatus() {
 		return status;
@@ -52,29 +61,20 @@ public class EmailConfirmation {
 		this.created_at = created_at;
 	}
 
-	public String getCode() {
-		return code;
+	public String getRating() {
+		return rating;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setRating(String rating) {
+		this.rating = rating;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	
 }

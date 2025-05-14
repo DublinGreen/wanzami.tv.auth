@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Video {
@@ -22,7 +21,7 @@ public class Video {
 	@JoinColumn(name = "category_id", nullable = false, updatable = false)
 	private Category category;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "author_id", nullable = false, updatable = false)
 	private Author author;
 		
@@ -32,14 +31,17 @@ public class Video {
 	@Column(name = "name", nullable = false, unique = true, length = 200)
 	private String name;
 	
-	@Column(name = "short_description", nullable = false, unique = false, length = 200)
+	@Column(name = "short_description", nullable = false, columnDefinition = "TEXT")
 	private String short_description;
 	
-	@Column(name = "description", nullable = false, unique = false, length = 200)
+	@Column(name = "description", nullable = false, columnDefinition = "TEXT")
 	private String description;
 	
 	@Column(nullable = false, unique = false, length = 200)
 	private String thumbnail;
+	
+	@Column(nullable = false, unique = false, length = 200)
+	private String banner;
 	
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
@@ -129,6 +131,14 @@ public class Video {
 
 	public void setShort_description(String short_description) {
 		this.short_description = short_description;
+	}
+
+	public String getBanner() {
+		return banner;
+	}
+
+	public void setBanner(String banner) {
+		this.banner = banner;
 	}
 	
 }

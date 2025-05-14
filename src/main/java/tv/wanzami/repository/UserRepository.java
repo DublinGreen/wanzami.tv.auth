@@ -10,7 +10,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
-	Optional<User> findByUsername(String username);
 	
 	@Query("SELECT u FROM User u WHERE u.status = 1")
     List<User> findAllActiveUsers();

@@ -1,0 +1,13 @@
+type VideoCountryRestriction {
+	id: ID!
+	note: String!
+	status: Int
+	video: Video
+	country: Country
+}
+
+extend type Query {
+	findAllVideoCountryRestrictions: [VideoCountryRestriction]!
+	countVideoCountryRestrictions: Int!
+	videoCountryRestrictionById(id:ID!):VideoCountryRestriction 
+}

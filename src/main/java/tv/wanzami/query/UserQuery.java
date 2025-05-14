@@ -9,18 +9,13 @@ import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
 import tv.wanzami.model.User;
 import tv.wanzami.repository.UserRepository;
-import tv.wanzami.service.EmailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
 @Component
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserQuery implements GraphQLQueryResolver {
 
-	private UserRepository userRepository;
-	
-    @Autowired
-    private EmailService emailService;
+	private UserRepository userRepository;	
 
 	GraphQLScalarType longScalar = ExtendedScalars.newAliasedScalar("Long").aliasedScalar(ExtendedScalars.GraphQLLong)
 			.build();
@@ -39,10 +34,6 @@ public class UserQuery implements GraphQLQueryResolver {
 	}
 
 	public long countUsers() throws Exception {
-//		emailService.sendEmail("wanzanmi@gmail.com", "Test Email from Spring Boot via Zoho",
-//				"Hello! This is a test email from Spring Boot using Zoho Mail.");
-		
-		emailService.sendSignupEmail("wanzanmi@gmail.com", "Welcome to the Wanzami Family", "greenDev", "https://www.wanzami.tv/");
 		return userRepository.count();
 	}
 

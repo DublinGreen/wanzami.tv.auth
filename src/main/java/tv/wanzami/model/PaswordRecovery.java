@@ -5,7 +5,7 @@ import java.time.Instant;
 import jakarta.persistence.*;
 
 @Entity
-public class EmailConfirmation {
+public class PaswordRecovery {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

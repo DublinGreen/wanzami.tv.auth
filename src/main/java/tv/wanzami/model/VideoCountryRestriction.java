@@ -5,22 +5,24 @@ import java.time.Instant;
 import jakarta.persistence.*;
 
 @Entity
-public class EmailConfirmation {
+public class VideoCountryRestriction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(name = "status", nullable = false, columnDefinition = "int(11) not null default 0")
 	private Integer status;
-
-	@Column(name = "userId", nullable = false)
-	private Long userId;
 	
-	@Column(name = "code", nullable = false, unique = true, length = 200)
-	private String code;
+	@ManyToOne
+	@JoinColumn(name = "video_id", nullable = false, updatable = false)
+	private Video video;
 	
-	@Column(name = "email", nullable = false, unique = true, length = 200)
-	private String email;
+	@ManyToOne
+	@JoinColumn(name = "country_id", nullable = false, updatable = false)
+	private Country country;
+	
+	@Column(name = "note", nullable = true)
+	private String note;
 	
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
@@ -35,7 +37,7 @@ public class EmailConfirmation {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
+	
 	public Instant getUpdated_at() {
 		return updated_at;
 	}
@@ -52,29 +54,28 @@ public class EmailConfirmation {
 		this.created_at = created_at;
 	}
 
-	public String getCode() {
-		return code;
+	public String getNote() {
+		return note;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setNote(String note) {
+		this.note = note;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Video getVideo() {
+		return video;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setVideo(Video video) {
+		this.video = video;
 	}
 
-	public String getEmail() {
-		return email;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
-
 	
 }
