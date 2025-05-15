@@ -6,14 +6,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
 import tv.wanzami.config.JwtUtil;
 import tv.wanzami.config.PasswordEncoder;
 import tv.wanzami.enums.Role;
+import tv.wanzami.infrastructure.MailRunner;
 import tv.wanzami.model.EmailConfirmation;
 import tv.wanzami.model.PaswordRecovery;
 import tv.wanzami.model.JwtToken;
@@ -23,31 +22,28 @@ import tv.wanzami.repository.JwtRepository;
 import tv.wanzami.repository.PasswordRecoveryRepository;
 import tv.wanzami.repository.UserRepository;
 import tv.wanzami.service.EmailConfirmationService;
-import tv.wanzami.service.EmailService;
 
 /**
  * User Mutation
  */
 @Component
-@CrossOrigin(origins = "http://localhost:3000")
 public class UserMutation implements GraphQLMutationResolver {
 
 	private UserRepository userRepository;
 	private JwtRepository jwtRepository;
 	private EmailConfirmationRepository emailConfirmationRepository;
 	private PasswordRecoveryRepository passwordRecoveryRepository;
+    private final MailRunner mailRunner;
 	
 	@Autowired
 	private EmailConfirmationService emailConfirmationService;
 	
-    @Autowired
-    private EmailService emailService;
-	
-	public UserMutation(UserRepository userRepository, JwtRepository jwtRepository, EmailConfirmationRepository emailConfirmationRepository, PasswordRecoveryRepository passwordRecoveryRepository) {
+	public UserMutation(UserRepository userRepository, JwtRepository jwtRepository, EmailConfirmationRepository emailConfirmationRepository, PasswordRecoveryRepository passwordRecoveryRepository, MailRunner mailRunner) {
 		this.userRepository = userRepository;
 		this.jwtRepository = jwtRepository;
 		this.emailConfirmationRepository = emailConfirmationRepository;
 		this.passwordRecoveryRepository = passwordRecoveryRepository;
+        this.mailRunner = mailRunner;
 	}
 	
 
@@ -78,12 +74,9 @@ public class UserMutation implements GraphQLMutationResolver {
 		emailConfirmationRepository.save(emailConfirmation);
 		
 		try {
-//			emailService.sendEmail("wanzanmi@gmail.com", "Test Email from Spring Boot via Zoho",
-//			"Hello! This is a test email from Spring Boot using Zoho Mail.");
-
-			emailService.sendSignupEmail(email, "Welcome to the Wanzami Family", firstName + " " + lastName, "https://www.wanzami.tv/emailconfirmation.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId());
-		} catch (MessagingException e) {
-		}
+            mailRunner.sendSignupEmail(email, "Welcome to the Wanzami Family", firstName + " " + lastName, "https://www.wanzami.tv/emailconfirmation.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId());
+        } catch (MessagingException e) {
+        }
 		
 		return user;
 	}
@@ -207,7 +200,7 @@ public class UserMutation implements GraphQLMutationResolver {
 			passwordRecoveryRepository.save(passwordRecovery);
 			
 			try {
-				emailService.sendPasswordRecoveryEmail(email, "Wanzami account Password Reset", user.getFirstName() + " " + user.getLastName(), "https://www.wanzami.tv/password-reset.html?code=" + emailConfirmation + "&id=" + user.getId());
+				mailRunner.sendPasswordRecoveryEmail(email, "Wanzami account Password Reset", user.getFirstName() + " " + user.getLastName(), "https://www.wanzami.tv/password-reset.html?code=" + emailConfirmation + "&id=" + user.getId());
 				return true;
 			} catch (MessagingException e) {
 				return false;
