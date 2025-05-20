@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Category {
+public class VideoCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false)
@@ -17,9 +17,12 @@ public class Category {
 	
 	@Column(name = "status", nullable = false, columnDefinition = "int(11) not null default 0")
 	private Integer status;
-
-	@Column(name = "name", nullable = false, unique = true, length = 200)
-	private String name;
+	
+	@Column(nullable = false)
+	private Integer video_id;
+	
+	@Column(nullable = false)
+	private Integer category_id;
 	
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
@@ -27,24 +30,17 @@ public class Category {
 	@Column(name = "updated_at", nullable = true)
 	private Instant updated_at;
 	
-	public Category() {
+	public VideoCategory() {
 	}
 
-	public Category(Long id) {
+	public VideoCategory(Long id) {
 		this.setId(id);
 	}
 
-	public Category(String name, Integer status) {
-		this.setName(name);
+	public VideoCategory(Integer video_id, Integer category_id, Integer status) {
+		this.setVideo_id(video_id);
+		this.setCategory_id(category_id);
 		this.setStatus(status);
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Integer getStatus() {
@@ -54,6 +50,23 @@ public class Category {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	public Integer getVideo_id() {
+		return video_id;
+	}
+
+	public void setVideo_id(Integer video_id) {
+		this.video_id = video_id;
+	}
+
+	public Integer getCategory_id() {
+		return category_id;
+	}
+
+	public void setCategory_id(Integer category_id) {
+		this.category_id = category_id;
+	}
+	
 
 	public Instant getUpdated_at() {
 		return updated_at;
@@ -78,5 +91,4 @@ public class Category {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 }

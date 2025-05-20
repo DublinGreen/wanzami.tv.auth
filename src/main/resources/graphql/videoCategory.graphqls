@@ -1,0 +1,12 @@
+type VideoCategory {
+	id: ID!
+	video_id: Int!
+	category_id: Int!
+	status: Int!
+}
+
+extend type Query {
+	findAllVideoCategories: [VideoCategory]!
+	countVideoCategories: Int!
+	videoCategoryById(id:ID!):VideoCategory 
+}

@@ -30,6 +30,13 @@ public class VideoCountryRestriction {
 	@Column(name = "updated_at", nullable = true)
 	private Instant updated_at;
 
+	public VideoCountryRestriction(long videoCountryRestrictionId) {
+		this.id = videoCountryRestrictionId;
+	}
+	
+	public VideoCountryRestriction() {
+	}
+	
 	public Integer getStatus() {
 		return status;
 	}

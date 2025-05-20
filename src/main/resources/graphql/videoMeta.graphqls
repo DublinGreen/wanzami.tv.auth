@@ -1,0 +1,14 @@
+type VideoMeta {
+	id: ID!
+	video_length: String!
+	video_quanlity: String!
+	video_url: String!
+	video_trailer_url: String!
+	video: Video
+}
+
+extend type Query {
+	findAllVideoMeta: [VideoMeta]!
+	countVideoMeta: Int!
+	videoMetaById(id:ID!):VideoMeta
+}

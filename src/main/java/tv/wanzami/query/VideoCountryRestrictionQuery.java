@@ -3,6 +3,7 @@ package tv.wanzami.query;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
+
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
@@ -32,5 +33,9 @@ public class VideoCountryRestrictionQuery implements GraphQLQueryResolver {
 	public Optional<VideoCountryRestriction> videoCountryRestrictionById(Long id) {
 		return videoCountryRestrictionRepository.findById(id);
 	}
-
+	
+	public Iterable<VideoCountryRestriction> videoCountryRestrictionByVideoId(Long videoId) {
+		return videoCountryRestrictionRepository.findByVideoId(videoId);
+	}
+	
 }

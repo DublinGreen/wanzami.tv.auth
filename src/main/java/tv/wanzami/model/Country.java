@@ -31,7 +31,7 @@ public class Country {
 	}
 
 	public Country(Long id) {
-		this.id = id;
+		this.setId(id);
 	}
 
 	public Country(String name, Integer status) {
@@ -53,6 +53,14 @@ public class Country {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

@@ -2,9 +2,24 @@ type Video {
 	id: ID!
 	category: Category!
 	author: Author!
+	videoRating: VideoRating!
 	status: Int
 	name: String!
 	description: String!
 	short_description: String!
 	thumbnail: String!
+	video_short_url: String!
+	banner: String!
+	reviews_rating: String!
+	videoMeta: VideoMeta
+}
+
+extend type Query {
+	findAllVideos: [Video]!
+	findAllVideoByRestrictedCountry(country: String!): [Video]!
+	searchVideoByRestrictedCountry(country: String!, videoName: String!): [Video]!
+	findVideoByRestrictedCountryAndCategory(country: String!, category: Int!): [Video]!
+	findVideoByRestrictedCountryAndSubCategory(country: String!, videoCategoryId: Int!): [Video]!
+	countVideos: Int!
+	videoById(id:ID!):Video 
 }

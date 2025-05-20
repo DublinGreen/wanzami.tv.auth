@@ -1,0 +1,12 @@
+type VideoRating {
+	id: ID!
+	status: Int
+	rating: String!
+	description: String!
+}
+
+extend type Query {
+	countVideoRating: Int!
+	videoRatingById(id:ID!):VideoRating
+	findAllVideoRating: [VideoRating]
+}

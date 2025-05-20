@@ -9,5 +9,6 @@ type VideoCountryRestriction {
 extend type Query {
 	findAllVideoCountryRestrictions: [VideoCountryRestriction]!
 	countVideoCountryRestrictions: Int!
-	videoCountryRestrictionById(id:ID!):VideoCountryRestriction 
+	videoCountryRestrictionById(id:ID!):VideoCountryRestriction
+	videoCountryRestrictionByVideoId(videoId:ID!): [VideoCountryRestriction]
 }

@@ -3,6 +3,7 @@ package tv.wanzami.query;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
+
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
