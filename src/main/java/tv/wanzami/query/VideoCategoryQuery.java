@@ -33,4 +33,5 @@ public class VideoCategoryQuery implements GraphQLQueryResolver {
 	public Optional<VideoCategory> videoCategoryById(Long id) {
 		return videoCategoryRepository.findById(id);
 	}
+
 }

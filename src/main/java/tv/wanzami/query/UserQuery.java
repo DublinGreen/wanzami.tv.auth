@@ -40,5 +40,9 @@ public class UserQuery implements GraphQLQueryResolver {
 	public Optional<User> userById(Long id) {
 		return userRepository.findById(id);
 	}
+	
+	public Optional<User> userByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 }

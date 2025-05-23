@@ -12,4 +12,7 @@ public interface VideoCategoryRepository extends JpaRepository<VideoCategory, Lo
 	
 	@Query("SELECT r FROM VideoCategory r WHERE category_id = :categoryId")
 	List<VideoCategory> findByCategoryId(@Param("categoryId") Long categoryId);
+	
+	@Query("SELECT r FROM VideoCategory r WHERE video_id = :videoId")
+	List<VideoCategory> findAllSubCategoryByVideoId(@Param("videoId") Long videoId);
 }

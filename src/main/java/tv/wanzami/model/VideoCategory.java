@@ -21,7 +21,7 @@ public class VideoCategory {
 	@Column(nullable = false)
 	private Integer video_id;
 	
-	@Column(nullable = false)
+	@Column(name = "category_id",nullable = false)
 	private Integer category_id;
 	
 	@Column(name = "created_at", nullable = true)

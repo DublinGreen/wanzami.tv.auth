@@ -13,6 +13,7 @@ type Query {
 	findAllUsers: [User]!
 	countUsers: Int!
 	userById(id:ID!):User 
+	userByEmail(email: String!): User
 }
 
 type Mutation {

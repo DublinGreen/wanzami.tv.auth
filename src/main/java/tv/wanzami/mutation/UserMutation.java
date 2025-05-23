@@ -90,7 +90,7 @@ public class UserMutation implements GraphQLMutationResolver {
 
 		if (optUser.isPresent()) {
 			user = optUser.get();
-			if (user.getSecret().equals(hashPassword)) {
+			if (user.getSecret().equals(hashPassword) && user.getStatus() == 1) {
 				token = JwtUtil.generateToken(email);
 				user.setPassword(token);
 				
@@ -118,7 +118,7 @@ public class UserMutation implements GraphQLMutationResolver {
 
 		if (optUser.isPresent()) {
 			user = optUser.get();
-			if (user.getSecret().equals(hashPassword)) {
+			if (user.getSecret().equals(hashPassword) && user.getStatus() == 1) {
 				token = JwtUtil.generateToken(email);
 				user.setPassword(token);
 				

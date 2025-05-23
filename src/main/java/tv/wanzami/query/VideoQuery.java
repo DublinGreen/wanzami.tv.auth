@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import graphql.kickstart.tools.GraphQLQueryResolver;
@@ -23,9 +24,13 @@ import tv.wanzami.repository.CountryRepository;
 import tv.wanzami.repository.VideoCategoryRepository;
 import tv.wanzami.repository.VideoCountryRestrictionRepository;
 import tv.wanzami.repository.VideoRepository;
+import tv.wanzami.service.PaystackService;
 
 @Component
 public class VideoQuery implements GraphQLQueryResolver {
+	
+    @Autowired
+    private PaystackService paystackService;
 
 	private VideoRepository videoRepository;
 	private VideoCountryRestrictionRepository videoCountryRestrictionRepository;
@@ -68,7 +73,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    List<VideoCountryRestriction> restrictions = videoCountryRestrictionRepository.findAll();
 	    Set<Long> restrictedVideoIds = new HashSet<>();
 	    for (VideoCountryRestriction restriction : restrictions) {
-	        if (restriction.getCountry().getId() == countryId) {
+	        if (restriction.getCountry().getId() == countryId && restriction.getStatus() == 1) {
 	            restrictedVideoIds.add(restriction.getVideo().getId());
 	        }
 	    }
@@ -112,7 +117,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    List<VideoCountryRestriction> restrictions = videoCountryRestrictionRepository.findAll();
 	    Set<Long> restrictedVideoIds = new HashSet<>();
 	    for (VideoCountryRestriction restriction : restrictions) {
-	        if (restriction.getCountry().getId() == countryId) {
+	        if (restriction.getCountry().getId() == countryId && restriction.getStatus() == 1) {
 	            restrictedVideoIds.add(restriction.getVideo().getId());
 	        }
 	    }
@@ -163,7 +168,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    List<VideoCountryRestriction> restrictions = videoCountryRestrictionRepository.findAll();
 	    Set<Long> restrictedVideoIds = new HashSet<>();
 	    for (VideoCountryRestriction restriction : restrictions) {
-	        if (restriction.getCountry().getId() == countryId) {
+	        if (restriction.getCountry().getId() == countryId && restriction.getStatus() == 1) {
 	            restrictedVideoIds.add(restriction.getVideo().getId());
 	        }
 	    }
@@ -208,7 +213,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    List<VideoCountryRestriction> restrictions = videoCountryRestrictionRepository.findAll();
 	    Set<Long> restrictedVideoIds = new HashSet<>();
 	    for (VideoCountryRestriction restriction : restrictions) {
-	        if (restriction.getCountry().getId() == countryId) {
+	        if (restriction.getCountry().getId() == countryId && restriction.getStatus() == 1) {
 	            restrictedVideoIds.add(restriction.getVideo().getId());
 	        }
 	    }
@@ -240,14 +245,33 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    }
 
 	}
-
 	
+	public List<Category> findAllSubCategoryByVideoId(Long videoId) {
+		List<VideoCategory> subCategories = videoCategoryRepository.findAllSubCategoryByVideoId(videoId);
+		
+		List<Long> categoryIds = new ArrayList<>();
+		for (VideoCategory vc : subCategories) {
+			if(vc.getStatus() == 1) {
+				categoryIds.add(vc.getId());
+			}
+		}
+		
+	    List<Category> categories = categoryRepository.findAllById(categoryIds);
+
+	    return categories;
+	}
+
 	public long countVideos() {
 		return videoRepository.count();
 	}
 
 	public Optional<Video> videoById(Long id) {
+		System.out.println(paystackService.verifyPayment("942118810"));
 		return videoRepository.findById(id);
 	}
+	
+    public String verifyPayment(String reference) {
+        return paystackService.verifyPayment(reference);
+    } 
 
 }

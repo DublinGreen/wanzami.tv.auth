@@ -20,6 +20,7 @@ extend type Query {
 	searchVideoByRestrictedCountry(country: String!, videoName: String!): [Video]!
 	findVideoByRestrictedCountryAndCategory(country: String!, category: Int!): [Video]!
 	findVideoByRestrictedCountryAndSubCategory(country: String!, videoCategoryId: Int!): [Video]!
+	findAllSubCategoryByVideoId(videoId:ID!):[Category]
 	countVideos: Int!
-	videoById(id:ID!):Video 
+	videoById(id:ID!):Video
 }
