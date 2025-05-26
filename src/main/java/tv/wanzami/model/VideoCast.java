@@ -5,35 +5,42 @@ import java.time.Instant;
 import jakarta.persistence.*;
 
 @Entity
-public class PaswordRecovery {
+public class VideoCast {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+		
 	@Column(name = "status", nullable = false, columnDefinition = "int(11) not null default 0")
 	private Integer status;
+		
+	@ManyToOne
+	@JoinColumn(name = "cast_id", nullable = false, updatable = false)
+	private Cast cast;
+	
+	@Column(name = "video_id", nullable = false)
+	private Integer videoId;
 
-	@Column(name = "userId", nullable = false)
-	private Long userId;
-	
-	@Column(name = "code", nullable = false, unique = true, length = 200)
-	private String code;
-	
-	@Column(name = "email", nullable = true, unique = false, length = 200)
-	private String email;
-	
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
 	
 	@Column(name = "updated_at", nullable = true)
 	private Instant updated_at;
-
-	public Integer getStatus() {
-		return status;
+	
+	public VideoCast() {
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
+	public VideoCast(Long id) {
+		this.id = id;
+	}
+
+	public VideoCast(Integer videoId, Cast cast) {
+		this.videoId = videoId;
+		this.status = 0;
+		this.cast = cast;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public Instant getUpdated_at() {
@@ -52,29 +59,28 @@ public class PaswordRecovery {
 		this.created_at = created_at;
 	}
 
-	public String getCode() {
-		return code;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Integer getVideo_id() {
+		return videoId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setVideo_id(Integer videoId) {
+		this.videoId = videoId;
 	}
 
-	public String getEmail() {
-		return email;
+	public Cast getCast() {
+		return cast;
 	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	
+	public void setCast(Cast cast) {
+		this.cast = cast;
+	}
+
 }

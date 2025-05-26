@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,8 +15,8 @@ import tv.wanzami.config.PasswordEncoder;
 import tv.wanzami.enums.Role;
 import tv.wanzami.infrastructure.MailRunner;
 import tv.wanzami.model.EmailConfirmation;
-import tv.wanzami.model.PaswordRecovery;
 import tv.wanzami.model.JwtToken;
+import tv.wanzami.model.PaswordRecovery;
 import tv.wanzami.model.User;
 import tv.wanzami.repository.EmailConfirmationRepository;
 import tv.wanzami.repository.JwtRepository;
@@ -74,7 +75,8 @@ public class UserMutation implements GraphQLMutationResolver {
 		emailConfirmationRepository.save(emailConfirmation);
 		
 		try {
-            mailRunner.sendSignupEmail(email, "Welcome to the Wanzami Family", firstName + " " + lastName, "https://www.wanzami.tv/emailconfirmation.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId());
+			String link = "https://www.wanzami.tv/login.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId();
+            mailRunner.sendSignupEmail(email, "Welcome to the Wanzami Family", firstName + " " + lastName, link);
         } catch (MessagingException e) {
         }
 		
@@ -232,6 +234,7 @@ public class UserMutation implements GraphQLMutationResolver {
 			
 		if(passwordRecovery.getUserId().toString().equals(user.getId().toString()) && passwordRecovery.getStatus() == 0) {
 			passwordRecovery.setStatus(1);
+			passwordRecovery.setEmail("");
 			passwordRecovery.setUpdated_at(new Date().toInstant());
 			passwordRecoveryRepository.save(passwordRecovery);
 			

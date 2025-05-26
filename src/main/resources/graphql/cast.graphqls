@@ -1,0 +1,12 @@
+type Cast {
+	id: ID!
+	status: Int
+	cast_image_url: String!
+	name: String!
+	gender: String!
+}
+
+extend type Query {
+	countCasts: Int!
+	castById(id:ID!):Cast
+}

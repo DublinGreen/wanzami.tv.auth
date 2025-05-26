@@ -1,0 +1,15 @@
+type VideoProductionCrew {
+	id: ID!
+	status: Int
+	videoId: Int!
+	position: String!
+	name: String!
+}
+
+extend type Query {
+	findAllVideoProductionCrew: [VideoProductionCrew]!
+	countVideoProductionCrew: Int!
+	videoProductionCrewById(id:ID!):VideoProductionCrew
+	videoProductionCrewByVideoId(id:ID!):[VideoProductionCrew]
+	videoProductionCrewByVideoIdAndStatus(id:ID!, status: Int!):[VideoProductionCrew]
+}
