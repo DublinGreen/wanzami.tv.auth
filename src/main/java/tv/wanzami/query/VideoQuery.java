@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import graphql.kickstart.tools.GraphQLQueryResolver;
@@ -49,10 +50,12 @@ public class VideoQuery implements GraphQLQueryResolver {
 		this.videoCategoryRepository = videoCategoryRepository;
 	}
 
+    @Cacheable(value = "videos")
 	public Iterable<Video> findAllVideos() {
 		return videoRepository.findAll();
 	}
 	
+    @Cacheable(value = "videosByCountry", key = "#country")
 	public Iterable<Video> findAllVideoByRestrictedCountry(String country) {		
 	    long countryId = 0;
 
@@ -91,6 +94,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    return videos; // List implements Iterable
 	}
 	
+    @Cacheable(value = "videosByCountryAndName", key = "T(java.util.Objects).hash(#country, #videoName)")
 	public Iterable<Video> searchVideoByRestrictedCountry(String country, String videoName) {		
 	    long countryId = 0;
 
@@ -140,6 +144,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    return videos;
 	}
 
+    @Cacheable(value = "videosByCountryAndCategory", key = "T(java.util.Objects).hash(#country, #categoryId)")
 	public Iterable<Video> findVideoByRestrictedCountryAndCategory(String country, long categoryId) {		
 	    long countryId = 0;
 	    long returnCategoryId = 0;
@@ -187,6 +192,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 
 	}
 
+    @Cacheable(value = "videosByCountryAndSubCategory", key = "T(java.util.Objects).hash(#country, #videoCategoryId)")
 	public Iterable<Video> findVideoByRestrictedCountryAndSubCategory(String country, long videoCategoryId) {		
 	    long countryId = 0;
 	    List<Video> returnVideos = new ArrayList<>();
@@ -246,6 +252,7 @@ public class VideoQuery implements GraphQLQueryResolver {
 
 	}
 	
+    @Cacheable(value = "categoriesByVideo", key = "#videoId")
 	public List<Category> findAllSubCategoryByVideoId(Long videoId) {
 		List<VideoCategory> subCategories = videoCategoryRepository.findAllSubCategoryByVideoId(videoId);
 		
@@ -261,10 +268,12 @@ public class VideoQuery implements GraphQLQueryResolver {
 	    return categories;
 	}
 
+    @Cacheable(value = "videoCount")
 	public long countVideos() {
 		return videoRepository.count();
 	}
 
+    @Cacheable(value = "videosById", key = "#id")
 	public Optional<Video> videoById(Long id) {
 		System.out.println(paystackService.verifyPayment("942118810"));
 		return videoRepository.findById(id);
