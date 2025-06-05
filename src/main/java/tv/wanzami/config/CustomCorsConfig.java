@@ -14,6 +14,10 @@ public class CustomCorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedOrigin("http://localhost");
+        config.addAllowedOrigin("https://main.d340l8snfu7p9a.amplifyapp.com");
+        config.addAllowedOrigin(" https://wanzami.tv");
+        config.addAllowedOrigin(" https://www.wanzami.tv");
+        config.addAllowedOrigin("https://admin.wanzami.tv");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.setAllowCredentials(true);

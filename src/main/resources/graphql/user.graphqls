@@ -10,8 +10,6 @@ type User {
 }
 
 type Query {
-	findAllUsers: [User]!
-	countUsers: Int!
 	userById(id:ID!):User 
 	userByEmail(email: String!): User
 }
@@ -21,8 +19,6 @@ type Mutation {
 	login(email: String!, password: String!): String!
 	loginAdmin(email: String!, password: String!): String!
 	logout(token: String): Int!	
-	softDeleteUserById(id: Int!): User!
-	setActiveUserById(id: Int!): User!
 	confirmEmailCode(code: String!, id: Int!): User!
 	passwordResetRequest(email: String!): Boolean!
 	passwordReset(password: String!, code: String!): Boolean!

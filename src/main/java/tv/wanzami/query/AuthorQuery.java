@@ -3,8 +3,6 @@ package tv.wanzami.query;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
@@ -12,7 +10,6 @@ import tv.wanzami.model.Author;
 import tv.wanzami.repository.AuthorRepository;
 
 @Component
-@CrossOrigin(origins = "http://localhost:3000")
 public class AuthorQuery implements GraphQLQueryResolver {
 
 	private AuthorRepository authorRepository;

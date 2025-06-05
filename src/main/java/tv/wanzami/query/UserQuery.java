@@ -2,8 +2,6 @@ package tv.wanzami.query;
 
 import java.util.Optional;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
@@ -12,7 +10,6 @@ import tv.wanzami.repository.UserRepository;
 import org.springframework.data.domain.Sort;
 
 @Component
-@CrossOrigin(origins = "http://localhost:3000")
 public class UserQuery implements GraphQLQueryResolver {
 
 	private UserRepository userRepository;	
@@ -26,6 +23,7 @@ public class UserQuery implements GraphQLQueryResolver {
 
 	public Iterable<User> findAllUsers() {
 		Sort sort = Sort.by(Sort.Direction.fromString("desc"), "id");
+		System.out.println("TESTING : ");
 		return userRepository.findAll(sort);
 	}
 

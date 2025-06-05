@@ -10,9 +10,9 @@
 		<relativePath />
 	</parent>
 	<groupId>com.bezkoder</groupId>
-	<artifactId>spring-boot-graphql-mysql</artifactId>
+	<artifactId>wanzami.tv.auth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-graphql-mysql</name>
+	<name>wanzami.tv.auth</name>
 	<description>wazami backend auth layer using Spring Boot GraphQL server with
 		MySQL
 		database</description>
