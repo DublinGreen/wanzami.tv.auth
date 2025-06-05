@@ -38,3 +38,16 @@ sudo certbot --nginx -d auth.wanzami.tv
 
 Use this to test, if the ssl install was succesful
 curl -v https://auth.wanzami.tv
+
+
+#add cors url
+The application using this application, add it to the cors in application.properties and CustomCorsConfig.java files
+
+------------------------------------------
+
+##Use postman or graphiql to inspect and test
+
+## Note, any deployment after, you need to reinstall the ssl
+
+sudo yum install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d auth.wanzami.tv
