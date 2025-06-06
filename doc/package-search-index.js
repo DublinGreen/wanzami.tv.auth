@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"tv.wazami"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.bezkoder.springgraphql.mysql"},{"l":"tv.wanzami"},{"l":"tv.wanzami.config"},{"l":"tv.wanzami.enums"},{"l":"tv.wanzami.exception"},{"l":"tv.wanzami.infrastructure"},{"l":"tv.wanzami.model"},{"l":"tv.wanzami.mutation"},{"l":"tv.wanzami.query"},{"l":"tv.wanzami.repository"},{"l":"tv.wanzami.resolver"},{"l":"tv.wanzami.security.jwt"},{"l":"tv.wanzami.service"}];updateSearchResults();

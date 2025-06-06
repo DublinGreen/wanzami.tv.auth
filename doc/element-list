@@ -1,1 +1,13 @@
-tv.wazami
+com.bezkoder.springgraphql.mysql
+tv.wanzami
+tv.wanzami.config
+tv.wanzami.enums
+tv.wanzami.exception
+tv.wanzami.infrastructure
+tv.wanzami.model
+tv.wanzami.mutation
+tv.wanzami.query
+tv.wanzami.repository
+tv.wanzami.resolver
+tv.wanzami.security.jwt
+tv.wanzami.service
