@@ -4,7 +4,6 @@ type User {
 	firstName: String!
 	lastName: String!
 	email: String!
-	telephone: String!
 	password: String
 	role: String!
 }
@@ -15,7 +14,7 @@ type Query {
 }
 
 type Mutation {
-	createUser(firstName: String!, lastName: String!, email: String!, password: String!, telephone: String!, role: String): User!
+	createUser(firstName: String!, lastName: String!, email: String!, password: String!, role: String): User!
 	login(email: String!, password: String!): String!
 	loginAdmin(email: String!, password: String!): String!
 	logout(token: String): Int!	

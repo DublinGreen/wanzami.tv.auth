@@ -35,9 +35,6 @@ public class User {
 
 	@Column(name = "password", nullable = false)
 	private String password;
-
-	@Column(name = "telephone", nullable = false, unique = false)
-	private String telephone;
 	
 	@Enumerated(EnumType.STRING)
     private Role role = Role.NORMAL; // default value;
@@ -77,14 +74,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
 	public Instant getCreated_at() {
 		return created_at;
 	}
@@ -116,13 +105,12 @@ public class User {
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String email, String passoword, String telephone) {
+	public User(String firstName, String lastName, String email, String passoword) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.status = 0;
 		this.email = email;
 		this.password = passoword;
-		this.telephone = telephone;
 	}
 
 	public String getRole() {

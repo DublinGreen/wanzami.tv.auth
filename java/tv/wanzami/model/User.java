@@ -27,9 +27,6 @@ public class User {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@Column(name = "telephone", nullable = false, unique = true)
-	private String telephone;
-
 	@Column(name = "created_at", nullable = true)
 	private Instant created_at;
 
@@ -73,14 +70,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
 	public Instant getCreated_at() {
 		return created_at;
 	}
@@ -112,12 +101,11 @@ public class User {
 	public User() {
 	}
 
-	public User(String username, String email, String passoword, String telephone) {
+	public User(String username, String email, String passoword) {
 		this.username = username;
 		this.status = 0;
 		this.email = email;
 		this.password = passoword;
-		this.telephone = telephone;
 	}
 
 }

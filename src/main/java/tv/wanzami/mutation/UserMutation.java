@@ -48,7 +48,7 @@ public class UserMutation implements GraphQLMutationResolver {
 	}
 	
 
-	public User createUser(String firstName, String lastName, String email, String password, String telephone, String role) {
+	public User createUser(String firstName, String lastName, String email, String password, String role) {
 		User user = new User();
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
@@ -58,7 +58,6 @@ public class UserMutation implements GraphQLMutationResolver {
 		user.setPassword(passwordEncoder.encode());
 
 		user.setStatus(0);
-		user.setTelephone(telephone);
 		user.setCreated_at(new Date().toInstant());
 		
 		if (role != null && role.equalsIgnoreCase(Role.ADMIN.toString()) && role.equalsIgnoreCase(Role.NORMAL.toString()))
@@ -75,7 +74,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		emailConfirmationRepository.save(emailConfirmation);
 		
 		try {
-			String link = "https://www.wanzami.tv/login.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId();
+			String link = "https://wanzami.tv/login.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId();
             mailRunner.sendSignupEmail(email, "Welcome to the Wanzami Family", firstName + " " + lastName, link);
         } catch (MessagingException e) {
         }
@@ -202,7 +201,7 @@ public class UserMutation implements GraphQLMutationResolver {
 			passwordRecoveryRepository.save(passwordRecovery);
 			
 			try {
-				mailRunner.sendPasswordRecoveryEmail(email, "Wanzami account Password Reset", user.getFirstName() + " " + user.getLastName(), "https://www.wanzami.tv/password-reset.html?code=" + emailConfirmation + "&id=" + user.getId());
+				mailRunner.sendPasswordRecoveryEmail(email, "Wanzami account Password Reset", user.getFirstName() + " " + user.getLastName(), "https://wanzami.tv/password-reset.html?code=" + emailConfirmation + "&id=" + user.getId());
 				return true;
 			} catch (MessagingException e) {
 				return false;

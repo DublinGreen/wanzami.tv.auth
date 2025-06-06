@@ -1,5 +1,7 @@
 package tv.wanzami.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CorsFilter;
@@ -12,12 +14,15 @@ public class CustomCorsConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:3000");
-        config.addAllowedOrigin("http://localhost");
-        config.addAllowedOrigin("https://main.d1m8vpcvr1g12z.amplifyapp.com/");
-        config.addAllowedOrigin(" https://wanzami.tv");
-        config.addAllowedOrigin(" https://www.wanzami.tv");
-        config.addAllowedOrigin("https://admin.wanzami.tv");
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of(
+            "http://localhost:3000",
+            "http://localhost",
+            "https://main.d1m8vpcvr1g12z.amplifyapp.com",
+            "https://wanzami.tv",
+            "https://admin.wanzami.tv",
+            "https://www.wanzami.tv"
+        ));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.setAllowCredentials(true);

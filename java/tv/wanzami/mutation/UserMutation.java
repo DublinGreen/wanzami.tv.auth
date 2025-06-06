@@ -20,7 +20,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		this.userRespository = userRespository;
 	}
 
-	public User createUser(String username, String email, String password, String telephone) {
+	public User createUser(String username, String email, String password) {
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
@@ -29,7 +29,6 @@ public class UserMutation implements GraphQLMutationResolver {
 		user.setPassword(passwordEncoder.encode());
 		
 		user.setStatus(0);
-		user.setTelephone(telephone);
 		user.setCreated_at(new Date().toInstant());
 		user.setUpdated_at(new Date().toInstant());
 
@@ -38,7 +37,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		return user;
 	}
 
-	public User updateUser(Long id, String username, String email, String password, String telephone) throws EntityNotFoundException {
+	public User updateUser(Long id, String username, String email, String password) throws EntityNotFoundException {
 		Optional<User> optUser = userRespository.findById(id);
 
 		if (optUser.isPresent()) {
@@ -55,9 +54,6 @@ public class UserMutation implements GraphQLMutationResolver {
 				user.setPassword(passwordEncoder.encode());	
 			}
 			
-			if (telephone != null)
-				user.setTelephone(telephone);
-
 			userRespository.save(user);
 			return user;
 		}
