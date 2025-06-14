@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>wanzami.tv.auth</groupId>
 	<artifactId>wanzami.tv.auth</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>wanzami.tv.auth</name>
 	<description>wazami backend auth layer using Spring Boot GraphQL server with
 		MySQL
