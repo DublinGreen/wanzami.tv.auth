@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
+import tv.wanzami.config.AppProperties;
 import tv.wanzami.config.JwtUtil;
 import tv.wanzami.config.PasswordEncoder;
 import tv.wanzami.enums.Role;
@@ -35,6 +36,9 @@ public class UserMutation implements GraphQLMutationResolver {
 	private EmailConfirmationRepository emailConfirmationRepository;
 	private PasswordRecoveryRepository passwordRecoveryRepository;
     private final MailRunner mailRunner;
+    
+    @Autowired
+    private AppProperties appProperties;
 	
 	@Autowired
 	private EmailConfirmationService emailConfirmationService;
@@ -74,7 +78,7 @@ public class UserMutation implements GraphQLMutationResolver {
 		emailConfirmationRepository.save(emailConfirmation);
 		
 		try {
-			String link = "https://wanzami.tv/login.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId();
+			String link = appProperties.getBaseUrl() + "/login.html?code=" + emailConfirmation.getCode() + "&id=" + user.getId();
             mailRunner.sendSignupEmail(email, "Welcome to the Wanzami Family", firstName + " " + lastName, link);
         } catch (MessagingException e) {
         }
@@ -104,6 +108,8 @@ public class UserMutation implements GraphQLMutationResolver {
 				
 				return token;
 
+			}else {
+				return "Account not activated.";
 			}
 		}
 		
@@ -201,7 +207,7 @@ public class UserMutation implements GraphQLMutationResolver {
 			passwordRecoveryRepository.save(passwordRecovery);
 			
 			try {
-				mailRunner.sendPasswordRecoveryEmail(email, "Wanzami account Password Reset", user.getFirstName() + " " + user.getLastName(), "https://wanzami.tv/password-reset.html?code=" + emailConfirmation + "&id=" + user.getId());
+				mailRunner.sendPasswordRecoveryEmail(email, "Wanzami account Password Reset", user.getFirstName() + " " + user.getLastName(),  appProperties.getBaseUrl() + "/password-reset.html?code=" + emailConfirmation + "&id=" + user.getId());
 				return true;
 			} catch (MessagingException e) {
 				return false;

@@ -4,9 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import tv.wanzami.config.AppProperties;
 
 /**
  * Application entry class
@@ -14,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
+@EnableConfigurationProperties(AppProperties.class)
 @EntityScan(basePackages = {"tv.wanzami.model"})
 @ComponentScan(basePackages = "tv.wanzami")
 @SpringBootApplication
