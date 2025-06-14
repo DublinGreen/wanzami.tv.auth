@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import tv.wanzami.config.AppProperties;
+import tv.wanzami.config.CorsProperties;
 
 /**
  * Application entry class
@@ -17,7 +18,7 @@ import tv.wanzami.config.AppProperties;
 
 @Configuration
 @EnableAutoConfiguration
-@EnableConfigurationProperties(AppProperties.class)
+@EnableConfigurationProperties({AppProperties.class, CorsProperties.class})
 @EntityScan(basePackages = {"tv.wanzami.model"})
 @ComponentScan(basePackages = "tv.wanzami")
 @SpringBootApplication

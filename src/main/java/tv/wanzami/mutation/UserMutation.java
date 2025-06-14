@@ -254,7 +254,6 @@ public class UserMutation implements GraphQLMutationResolver {
 		return returnValue;
 	}
 	
-	
 	public User softDeleteUserById(Long id) throws EntityNotFoundException {
 		Optional<User> optUser = userRepository.findById(id);
 

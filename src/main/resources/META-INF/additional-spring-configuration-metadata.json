@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "app.name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.name'"
+  },
+  {
+    "name": "app.version",
+    "type": "java.lang.String",
+    "description": "A description for 'app.version'"
+  },
+  {
+    "name": "app.secretkey",
+    "type": "java.lang.String",
+    "description": "A description for 'app.secretkey'"
+  },
+  {
+    "name": "mail.from",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.from'"
+  },
+  {
+    "name": "jwt.secret.key",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret.key'"
+  },
+  {
+    "name": "jwt.token.expiration.time",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.token.expiration.time'"
+  }
+]}
